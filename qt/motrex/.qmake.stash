@@ -1,0 +1,23 @@
+QMAKE_CXX.QT_COMPILER_STDCXX = 201703L
+QMAKE_CXX.QMAKE_GCC_MAJOR_VERSION = 11
+QMAKE_CXX.QMAKE_GCC_MINOR_VERSION = 4
+QMAKE_CXX.QMAKE_GCC_PATCH_VERSION = 0
+QMAKE_CXX.COMPILER_MACROS = \
+    QT_COMPILER_STDCXX \
+    QMAKE_GCC_MAJOR_VERSION \
+    QMAKE_GCC_MINOR_VERSION \
+    QMAKE_GCC_PATCH_VERSION
+QMAKE_CXX.INCDIRS = \
+    /usr/arm-linux-gnueabi/include/c++/11 \
+    /usr/arm-linux-gnueabi/include/c++/11/arm-linux-gnueabi \
+    /usr/arm-linux-gnueabi/include/c++/11/backward \
+    /usr/lib/gcc-cross/arm-linux-gnueabi/11/include \
+    /usr/arm-linux-gnueabi/include \
+    /usr/include
+QMAKE_CXX.LIBDIRS = \
+    /usr/lib/gcc-cross/arm-linux-gnueabi/11 \
+    /usr/arm-linux-gnueabi/lib \
+    /lib/arm-linux-gnueabi \
+    /lib \
+    /usr/lib/arm-linux-gnueabi \
+    /usr/lib
