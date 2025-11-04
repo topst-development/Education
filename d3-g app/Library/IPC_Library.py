@@ -66,7 +66,7 @@ IOCTL_IPC_GET_PARAM = 0x03
 IOCTL_IPC_PING_TEST = 0x04
 IOCTL_IPC_FLUSH = 0x05
 IOCTL_IPC_ISREADY = 0x06
-sndFile = ""
+#sndFile = ""
 
 
 #IPC ====================
@@ -131,7 +131,7 @@ def IPC_SendPacketWithIPCHeader(sndFile, channel_bitmask, tx_only_channel_bitmas
     uiCmd1 = TCC_IPC_CMD_CA72_EDUCATION_CAN_DEMO
     uiCmd2 = IPC_IPC_CMD_CA72_EDUCATION_CAN_DEMO_START
     pucData_len = len(pucData)
-    print(f"pucData_len: {pucData_len}")
+    #print(f"pucData_len: {pucData_len}")
 
     if pucData_len <= 0:
         print("Error: No data")
@@ -168,10 +168,10 @@ def IPC_SendPacketWithIPCHeader(sndFile, channel_bitmask, tx_only_channel_bitmas
     #00 01 
     #00 00 
     #00 00 34
-    print("pucData:", end=" ")
-    for byte in pucData:
-        print(f"{byte:02X}", end=" ")
-    print()
+    #print("pucData:", end=" ")
+    #for byte in pucData:
+        #print(f"{byte:02X}", end=" ")
+    #print()
 
     # uiCmd3 that add channel and tx only channel in packet_send
     packet_send[IPC_PACKET_PREPARE_SIZE] = (channel_bitmask & 0xFF)
@@ -195,9 +195,9 @@ def IPC_SendPacketWithIPCHeader(sndFile, channel_bitmask, tx_only_channel_bitmas
     total_size = packet_size + IPC_PACKET_CRC_SIZE
 
     # Debugging: Print the packet data before sending
-    print("Calculated CRC:", format(crc, '02X'))
-    print("Packet size:", packet_size)
-    print("total size:", total_size)
+    #print("Calculated CRC:", format(crc, '02X'))
+    #print("Packet size:", packet_size)
+    #print("total size:", total_size)
 
     packet_send[packet_size] = (crc >> 8) & 0xFF
     packet_send[packet_size + 1] = crc & 0xFF
@@ -205,8 +205,8 @@ def IPC_SendPacketWithIPCHeader(sndFile, channel_bitmask, tx_only_channel_bitmas
     #cmd = [0, (WRITE_CMD << 16) | IPC_WRITE, packet_size, 0, 0, 0]
 
     # Debugging: Print the packet data before sending
-    print("Packet data before sending:")
-    print(' '.join(format(byte, '02X') for byte in packet_send[:total_size]))
+    #print("Packet data before sending:")
+    #print(' '.join(format(byte, '02X') for byte in packet_send[:total_size]))
 
     # Convert array.array to bytes
     packet_bytes = bytes(packet_send[:total_size])
@@ -219,7 +219,7 @@ def IPC_SendPacketWithIPCHeader(sndFile, channel_bitmask, tx_only_channel_bitmas
             sndFile.write(packet_bytes)
             now = time.time() * 1000
             sndFile.flush()  # 
-            print(f"{sndCnt}: send{packet_bytes} at {now:.0f}")
+            #print(f"{sndCnt}: send{packet_bytes} at {now:.0f}")
             # Sleep for 1 second
             #time.sleep(0.5)
             sndCnt+=1
@@ -246,7 +246,7 @@ def IPC_ReceivePacketFromIPCHeader(file_path, recv_count=1, recv_timeout=None):
     start_time = time.time()
 
     # Read the ipc packet
-    print(f"Read from ipc file_path: {file_path}")
+    #print(f"Read from ipc file_path: {file_path}")
 
     # Open the file for reading
     file_descriptor = os.open(file_path, os.O_RDWR | os.O_NONBLOCK)
@@ -262,7 +262,7 @@ def IPC_ReceivePacketFromIPCHeader(file_path, recv_count=1, recv_timeout=None):
 
         if recv_timeout is not None and recv_count == 1:
             if time.time() - start_time > recv_timeout:
-                print(f"[RECV] Timeout: No data received within {recv_timeout:.1f} seconds.")
+                #print(f"[RECV] Timeout: No data received within {recv_timeout:.1f} seconds.")
                 break
 
         # Use select to wait for the file to become readable
@@ -273,10 +273,10 @@ def IPC_ReceivePacketFromIPCHeader(file_path, recv_count=1, recv_timeout=None):
             received_data = os.read(file_descriptor, IPC_MAX_PACKET_SIZE)
             #print(f"{file_path}:: {received_data}")
 
-            print("Received data in decimal format:")
-            for byte in received_data:
-                print(f"{byte:d}", end=' ')
-            print()  # New line after printing all bytes
+            #print("Received data in decimal format:")
+            #for byte in received_data:
+                #print(f"{byte:d}", end=' ')
+            #print()  # New line after printing all bytes
 
             # Convert the data into a byte array
             received_packet = bytearray(received_data)
@@ -299,22 +299,22 @@ def IPC_ReceivePacketFromIPCHeader(file_path, recv_count=1, recv_timeout=None):
             calculated_crc = IPC_CalcCrc16(received_packet, len(received_packet) - 2, 0)
 
             # For debugging, print the parsed data
-            print("Received Sync:", format(received_sync, '02X'))
-            print("Received Start1:", format(received_start1, '02X'))
-            print("Received Start2:", format(received_start2, '02X'))
-            print("Received uiCmd1:", format(received_uiCmd1, '02X'))
-            print("Received uiCmd2:", format(received_uiCmd2, '02X'))
-            print("Received uiLength:", received_uiLength)
-            print("Received pucData:", ' '.join(format(byte, '02X') for byte in received_pucData))
+            #print("Received Sync:", format(received_sync, '02X'))
+            #print("Received Start1:", format(received_start1, '02X'))
+            #print("Received Start2:", format(received_start2, '02X'))
+            #print("Received uiCmd1:", format(received_uiCmd1, '02X'))
+            #print("Received uiCmd2:", format(received_uiCmd2, '02X'))
+            #print("Received uiLength:", received_uiLength)
+            #print("Received pucData:", ' '.join(format(byte, '02X') for byte in received_pucData))
             #print ("Received pucData:", received_pucData.decode('ascii'))
             #decoded_str = received_pucData.decode('ascii')
-            print("Received CRC:", format(received_crc, '02X'))
-            print("calculated CRC:", format(calculated_crc, '02X'))
+            #print("Received CRC:", format(received_crc, '02X'))
+            #print("calculated CRC:", format(calculated_crc, '02X'))
 
-            if calculated_crc == received_crc:
-                print("CRC check passed!")
-            else:
-                print("CRC check failed!")
+            #if calculated_crc == received_crc:
+                #print("CRC check passed!")
+            #else:
+                #print("CRC check failed!")
             
             revCnt += 1
 
