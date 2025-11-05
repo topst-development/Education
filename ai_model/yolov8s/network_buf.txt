@@ -1,5 +1,0 @@
-CODE      18200
-WGHT     aa5100
-WORK     7d0000
-IACT     12c000
-OACT      c4e00
