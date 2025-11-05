@@ -3,11 +3,12 @@ import threading
 from Library.IPC_Library import IPC_SendPacketWithIPCHeader, IPC_ReceivePacketFromIPCHeader
 from Library.IPC_Library import TCC_IPC_CMD_CA72_EDUCATION_CAN_DEMO, IPC_IPC_CMD_CA72_EDUCATION_CAN_DEMO_START
 from Library.IPC_Library import parse_hex_data, parse_string_data, parse_channels, parse_hex16
+sndfile = open("/dev/tcc_ipc_micom",'wb')
 
 def sendtoCAN(channel, canId, sndDataHex):
         sndData = parse_hex_data(sndDataHex)
         uiLength = len(sndData)
-        ret = IPC_SendPacketWithIPCHeader("/dev/tcc_ipc_micom", channel_bitmask, tx_only_channel_bitmask, canID, sndData)
+        ret = IPC_SendPacketWithIPCHeader(sndfile, channel_bitmask, tx_only_channel_bitmask, canID, sndData)
 
 def receiveFromCAN():
         micom_thread = threading.Thread(target=IPC_ReceivePacketFromIPCHeader, args=("/dev/tcc_ipc_micom", 1))
@@ -16,7 +17,7 @@ def receiveFromCAN():
 def main():
     parser = argparse.ArgumentParser(description="IPC Sender/Receiver")
     parser.add_argument("mode", choices=["snd", "rev", "sndrecv"], help="'snd': send, 'rev': receive, 'sndrecv': send then receive once")
-    parser.add_argument("--file_path", default="/dev/tcc_ipc_micom", help="File path for IPC communication")
+    parser.add_argument("--file_path", default=sndfile, help="File path for IPC communication")
     parser.add_argument("--channel", type=int, default=1, help="can channel bit flag: b111")
     parser.add_argument("--txOnly", type=int, default=0, help="tx only channel bit flag: b111 (dec: 1, 2, 4) ")
     parser.add_argument("--canID", type=parse_hex16, default=0, help="CAN ID max 16-bit: e.g. 123 or 0x1234")
