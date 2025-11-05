@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/icons">
-        <file>test.obj</file>
-        <file>config.json</file>
-    </qresource>
-</RCC>
