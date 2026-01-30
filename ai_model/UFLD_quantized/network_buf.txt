@@ -1,0 +1,5 @@
+CODE      10600
+WGHT    2aa6600
+WORK     465000
+IACT      a8c00
+OACT       38a0
