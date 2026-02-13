@@ -1,0 +1,29 @@
+{
+  "events": [
+    { "frame": 1, "signals": {  } },
+    { "frame": 2,  "signals": { "speed": 40 } },
+    { "frame": 3,  "signals": { "speed": 40 } },
+    { "frame": 4,  "signals": { "speed": 40 } },
+    { "frame": 5,  "signals": { "speed": 40 } },
+    { "frame": 6,  "signals": { "speed": 40 } },
+    { "frame": 7,  "signals": { "speed": 40 } },
+    { "frame": 8,  "signals": { "speed": 40 } },
+    { "frame": 9,  "signals": { "speed": 40 } },
+    { "frame": 300, "signals": { "left_blinker": false, "right_blinker": true,"fuel_level": 75,"break_light": true } },
+    { "frame": 360, "signals": { "speed": 40 } },
+    { "frame": 361, "signals": { "speed": 39 } },
+    { "frame": 362, "signals": { "speed": 38 } },
+    { "frame": 363, "signals": { "speed": 37 } },
+    { "frame": 364, "signals": { "speed": 46 } },
+    { "frame": 365, "signals": { "speed": 35 } },
+    { "frame": 366, "signals": { "speed": 34 } },
+    { "frame": 367, "signals": { "speed": 33 } },
+    { "frame": 368, "signals": { "speed": 34 } },
+    { "frame": 369, "signals": { "speed": 35 } },
+    { "frame": 480, "signals": { "speed": 36 } },
+    { "frame": 490, "signals": { "speed": 37 } },
+    { "frame": 500, "signals": { "speed": 38 } },
+    { "frame": 1010, "signals": {"right_blinker": false,"fuel_level": 80,"break_light": true } },
+    { "frame": 1210, "signals": {"emergency_light": true,"fuel_level": 100,"break_light": true } }
+  ]
+}
